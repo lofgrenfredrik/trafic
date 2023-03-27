@@ -11,7 +11,7 @@ function deviationsStatus(deviations, journeyNumber) {
     return deviations.map((deviation) => (
       <span
         key={journeyNumber + deviation.ImportanceLevel}
-        className="ml-3 bg-white px-1 font-bold text-red-600"
+        className="bg-white px-1 font-bold text-red-600"
       >
         {deviation.Text}
       </span>
@@ -23,14 +23,16 @@ function deviationsStatus(deviations, journeyNumber) {
 function departureItems(item) {
   return (
     <li
-      className=" flex justify-between px-2 py-1 text-lg text-white odd:bg-black/25"
+      className=" flex flex-col px-2 py-1 text-lg text-white odd:bg-black/25"
       key={item.JourneyNumber}
     >
-      <span>
-        {item.LineNumber} {item.Destination}
+      <span className="flex justify-between">
+        <span>
+          {item.LineNumber} {item.Destination}
+        </span>
+        {item.DisplayTime}
       </span>
-      <span>{deviationsStatus(item.Deviations, item.JourneyNumber)}</span>
-      <span className="">{item.DisplayTime}</span>
+      {deviationsStatus(item.Deviations, item.JourneyNumber)}
     </li>
   )
 }
