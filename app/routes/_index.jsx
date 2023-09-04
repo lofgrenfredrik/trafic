@@ -6,12 +6,19 @@ export async function loader() {
   ).then((res) => res.json())
 }
 
+export const meta = () => {
+  return [
+    { title: "Trafic in Vega" },
+    { name: "description", content: "Vega" },
+  ];
+};
+
 function deviationsStatus(deviations, journeyNumber) {
   if (deviations) {
     return deviations.map((deviation) => (
       <span
         key={journeyNumber + deviation.ImportanceLevel}
-        className="bg-white px-1 font-bold text-red-600"
+        className="bg-white p-1 font-bold text-red-600 my-2"
       >
         {deviation.Text}
       </span>
@@ -39,6 +46,7 @@ function departureItems(item) {
 
 export default function Index() {
   const { ResponseData } = useLoaderData()
+
   const trains = ResponseData.Trains
   const buses = ResponseData.Buses
   const cityBound = trains.filter((train) => train.JourneyDirection === 2)
@@ -47,20 +55,22 @@ export default function Index() {
   return (
     <div className="flex flex-col items-center justify-center gap-6 lg:mx-16">
       <h1 className="py-7 font-serif text-5xl font-bold">Vega station</h1>
-      <div className="flex w-full max-w-[700px] flex-col gap-6 bg-sky-500 p-3">
-        <div>
+
+      <div className="w-full max-w-[700px] bg-sky-500 p-3">
           <h2 className="text-2xl font-bold">Mot stan</h2>
           <ul>{cityBound.map((train) => departureItems(train))}</ul>
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold">Söderut</h2>
-          <ul>{nonCityBound.map((train) => departureItems(train))}</ul>
-        </div>
       </div>
-      <div className="flex w-full max-w-[700px] flex-col bg-red-500 p-3">
+
+      <div className="w-full max-w-[700px] bg-red-500 p-3">
         <h2 className="text-2xl font-bold">Buss 837</h2>
         <ul>{buses.filter((bus) => bus.LineNumber === "837").map((bus) => departureItems(bus))}</ul>
       </div>
+
+      <div className="w-full max-w-[700px] bg-sky-500 p-3">
+          <h2 className="text-2xl font-bold">Söderut</h2>
+          <ul>{nonCityBound.map((train) => departureItems(train))}</ul>
+      </div>
+
     </div>
   )
 }
