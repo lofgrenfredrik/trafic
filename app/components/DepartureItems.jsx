@@ -11,7 +11,7 @@ export default function DepartureItems({items}) {
         >
           <span className="flex justify-between">
             <span>
-              {item.line.id} {item.direction}
+              {item.line.designation} {item.direction}
             </span>
             {item.display}
           </span>

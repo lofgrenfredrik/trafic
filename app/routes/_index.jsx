@@ -12,6 +12,7 @@ export default function Index() {
 
       <a className="underline text-2xl font-bold" href="/vega">VEGA</a>
       <a className="underline text-2xl font-bold" href="/sodra">SÖDRA</a>
+      <a className="underline text-2xl font-bold" href="/city">CITY</a>
 
     </div>
   )
